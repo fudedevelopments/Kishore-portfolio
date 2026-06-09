@@ -1,5 +1,5 @@
 export const skills = {
-  development: ['Python', 'Odoo Development', 'PostgreSQL'],
-  marketing: ['SEO', 'Performance Marketing', 'Marketing Automation'],
-  creative: ['Content Creation', 'UI/UX', 'Design Thinking'],
+  development: ['Software Testing', 'Web Designing'],
+  marketing: ['SEO', 'Social Media Management', 'Performance Marketing', 'Marketing Automation'],
+  creative: ['Graphic Designing', 'Content Creation', 'Content Writing', 'Time management'],
 };

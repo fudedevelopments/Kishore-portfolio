@@ -3,9 +3,9 @@ export const profile = {
   title: 'Digital Marketing Specialist & Software Developer',
   subtitle:
     'Building scalable digital experiences through technology, marketing, and creativity.',
-  email: 'kishore@example.com',
-  phone: '+91-9876543210',
-  location: 'Chennai, India',
+  email: 'kitchuramesh01@gmail.com',
+  phone: '+91 63817 63864',
+  location: '33, Thirumagal nagar, Peelamedu Pudur, Coimbatore - 641004',
   resume: '/resume.pdf',
   portrait: '/images/portrait.svg',
 };

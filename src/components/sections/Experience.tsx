@@ -34,6 +34,9 @@ export const Experience: React.FC = () => {
               <div className="timeline-role">{e.role}</div>
               <div className="timeline-company">{e.company}</div>
               <div className="timeline-period">{e.period}</div>
+              {e.description && (
+                <div className="mt-2 text-sm text-gray-400" style={{ lineHeight: '1.6' }}>{e.description}</div>
+              )}
             </div>
           </motion.div>
         ))}
