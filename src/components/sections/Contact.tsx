@@ -13,6 +13,36 @@ const fadeUp = {
 };
 
 export const Contact: React.FC = () => {
+  const [status, setStatus] = React.useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('submitting');
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        form.reset();
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      setStatus('error');
+    }
+  };
+
   return (
     <section id="contact" className="section-container">
       <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
@@ -89,15 +119,27 @@ export const Contact: React.FC = () => {
         <motion.div custom={2} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           <div className="contact-form-card">
             <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#fff', marginBottom: '1.5rem' }}>Send a Message</h3>
-            <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <input className="form-input" placeholder="Your name" />
-              <input className="form-input" placeholder="Email address" type="email" />
-              <textarea className="form-input form-textarea" placeholder="Your message" />
-              <button type="button" className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
-                Send Message
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" />
-                </svg>
+            <form onSubmit={handleSubmit} action="https://formspree.io/f/xykajren" method="POST" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {status === 'success' && (
+                <div style={{ padding: '0.75rem 1rem', background: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.2)', borderRadius: '0.5rem', color: '#34d399', fontSize: '0.9rem', textAlign: 'center' }}>
+                  Message sent successfully!
+                </div>
+              )}
+              {status === 'error' && (
+                <div style={{ padding: '0.75rem 1rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.2)', borderRadius: '0.5rem', color: '#f87171', fontSize: '0.9rem', textAlign: 'center' }}>
+                  Oops! There was a problem submitting your form.
+                </div>
+              )}
+              <input name="name" className="form-input" placeholder="Your name" required disabled={status === 'submitting'} />
+              <input name="email" className="form-input" placeholder="Email address" type="email" required disabled={status === 'submitting'} />
+              <textarea name="message" className="form-input form-textarea" placeholder="Your message" required disabled={status === 'submitting'} />
+              <button type="submit" className="btn-primary" disabled={status === 'submitting'} style={{ width: '100%', justifyContent: 'center', opacity: status === 'submitting' ? 0.7 : 1 }}>
+                {status === 'submitting' ? 'Sending...' : 'Send Message'}
+                {status !== 'submitting' && (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+                )}
               </button>
             </form>
           </div>

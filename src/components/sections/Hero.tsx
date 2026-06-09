@@ -37,6 +37,7 @@ export const Hero: React.FC = () => {
         />
       </div>
       <div className="hero-bg-overlay" />
+      <div className="hero-bg-glow" />
 
       {/* Content */}
       <div className="hero-content-wrapper">

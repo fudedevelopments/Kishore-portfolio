@@ -6,7 +6,7 @@ export const projects = [
       'Java based research project exploring covert timing channels and reversible data hiding techniques.',
     github: '#',
     demo: '#',
-    image: '/images/project1.svg',
+    image: '/images/project1.png',
   },
   {
     id: 'proj-2',
@@ -15,6 +15,6 @@ export const projects = [
       'IOT Based mini project focused on sustainable water conservation and monitoring.',
     github: '#',
     demo: '#',
-    image: '/images/project2.svg',
+    image: '/images/project2.png',
   },
 ];

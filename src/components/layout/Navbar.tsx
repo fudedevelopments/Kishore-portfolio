@@ -119,7 +119,6 @@ export const Navbar: React.FC = () => {
             aria-label="Menu"
             onClick={() => setOpen(!open)}
             style={{
-              display: 'none',
               padding: '0.5rem',
               background: 'transparent',
               border: 'none',
@@ -155,7 +154,17 @@ export const Navbar: React.FC = () => {
                 <a
                   key={n.href}
                   href={n.href}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpen(false);
+                    const targetId = n.href.replace('#', '');
+                    const elem = document.getElementById(targetId);
+                    if (elem) {
+                      const offsetTop = elem.getBoundingClientRect().top + window.scrollY - 80;
+                      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                      window.history.pushState(null, '', n.href);
+                    }
+                  }}
                   style={{
                     padding: '0.5rem 0',
                     color: activeSection === n.href ? '#3b82f6' : '#9ca3af',
@@ -175,9 +184,9 @@ export const Navbar: React.FC = () => {
       <style dangerouslySetInnerHTML={{ __html: `
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
-          .mobile-menu-btn { display: block !important; }
         }
         @media (min-width: 769px) {
+          .mobile-menu-btn { display: none !important; }
           .mobile-nav { display: none !important; }
         }
       `}} />
