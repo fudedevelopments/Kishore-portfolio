@@ -6,12 +6,11 @@ import { Experience } from '@/components/sections/Experience';
 import { Projects } from '@/components/sections/Projects';
 import { Certifications } from '@/components/sections/Certifications';
 import { Contact } from '@/components/sections/Contact';
-import { useLenis } from '@/hooks/useLenis';
+import LenisProvider from '@/components/layout/LenisProvider';
 
 export default function Page() {
-  useLenis();
   return (
-    <>
+    <LenisProvider>
       <Hero />
       <About />
       <Skills />
@@ -19,6 +18,6 @@ export default function Page() {
       <Projects />
       <Certifications />
       <Contact />
-    </>
+    </LenisProvider>
   );
 }

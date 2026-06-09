@@ -1,31 +1,42 @@
 "use client";
 import React from 'react';
-import { Card } from '@/components/ui/Card';
-import { motion } from 'framer-motion';
-import { fadeLeft } from '@/components/animations/motion';
-
 import { experience } from '@/config/experience';
+import { motion } from 'framer-motion';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.5, delay: i * 0.12, ease: 'easeOut' },
+  }),
+};
 
 export const Experience: React.FC = () => {
   return (
-    <section id="experience" className="py-20">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold">Experience</h2>
-        <div className="mt-6 space-y-4">
-          {experience.map((e) => (
-            <motion.div key={e.role} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-              <Card>
-                <div className="flex justify-between items-start">
-                  <div>
-                    <div className="font-semibold">{e.role}</div>
-                    <div className="text-sm text-gray-400">{e.company}</div>
-                  </div>
-                  <div className="text-sm text-gray-400">{e.period}</div>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+    <section id="experience" className="section-container">
+      <motion.div custom={0} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+        <div className="section-label">My Journey</div>
+        <h2 className="section-title">Work Experience</h2>
+      </motion.div>
+      <div className="timeline">
+        {experience.map((e, i) => (
+          <motion.div
+            key={e.role}
+            className="timeline-item"
+            custom={i + 1}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <div className="timeline-dot" />
+            <div className="timeline-card">
+              <div className="timeline-role">{e.role}</div>
+              <div className="timeline-company">{e.company}</div>
+              <div className="timeline-period">{e.period}</div>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

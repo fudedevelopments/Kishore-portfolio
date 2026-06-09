@@ -1,8 +1,8 @@
 "use client";
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, type HTMLMotionProps } from 'framer-motion';
 
-type Props = React.ComponentProps<'button'> & { href?: string };
+type Props = HTMLMotionProps<'button'> & { href?: string };
 
 export const Button: React.FC<Props> = ({ children, className = '', ...props }) => {
   return (
