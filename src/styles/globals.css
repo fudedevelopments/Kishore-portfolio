@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0A0A0A;
+  --secondary: #111111;
+  --accent: #3B82F6;
+  --text: #E5E5E5;
+}
+
+html, body, #__next {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Glass card */
+.glass {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg,var(--accent),#9b8cff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
