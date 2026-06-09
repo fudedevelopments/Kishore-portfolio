@@ -154,16 +154,9 @@ export const Navbar: React.FC = () => {
                 <a
                   key={n.href}
                   href={n.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setOpen(false);
-                    const targetId = n.href.replace('#', '');
-                    const elem = document.getElementById(targetId);
-                    if (elem) {
-                      const offsetTop = elem.getBoundingClientRect().top + window.scrollY - 80;
-                      window.scrollTo({ top: offsetTop, behavior: 'smooth' });
-                      window.history.pushState(null, '', n.href);
-                    }
+                  onClick={() => {
+                    // Let the native anchor click happen first, then close the menu
+                    setTimeout(() => setOpen(false), 150);
                   }}
                   style={{
                     padding: '0.5rem 0',
